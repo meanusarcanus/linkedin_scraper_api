@@ -1,0 +1,35 @@
+{
+  "title": "LinkedIn Scraper Pro Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "profile_url": {
+      "title": "LinkedIn Profile URL",
+      "type": "string",
+      "description": "Specific LinkedIn profile URL (e.g. https://www.linkedin.com/in/williamhgates).",
+      "editor": "textfield",
+      "prefill": "https://www.linkedin.com/in/williamhgates"
+    },
+    "search_query": {
+      "title": "Search Query / Job Title & Location",
+      "type": "string",
+      "description": "Search term across LinkedIn.",
+      "editor": "textfield",
+      "prefill": "VP of Engineering San Francisco"
+    },
+    "extract_email": {
+      "title": "Extract Verified Email",
+      "type": "boolean",
+      "description": "Perform live SMTP email verification for decision maker.",
+      "default": true
+    },
+    "max_profiles": {
+      "title": "Max Profiles to Extract",
+      "type": "integer",
+      "description": "Maximum number of LinkedIn profiles to scrape.",
+      "editor": "number",
+      "default": 20,
+      "prefill": 20
+    }
+  }
+}

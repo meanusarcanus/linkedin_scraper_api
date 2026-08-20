@@ -1,0 +1,335 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "LinkedIn Profile Scraper & Verified Email Extractor Pro",
+    "description": "High-performance API engine to scrape bulk LinkedIn profiles, work experience, education, skills, and verified emails without cookies or account login.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Read Root",
+        "operationId": "read_root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scrape-linkedin": {
+      "post": {
+        "summary": "Scrape Linkedin",
+        "operationId": "scrape_linkedin_scrape_linkedin_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkedInScrapeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkedInScrapeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Education": {
+        "properties": {
+          "school": {
+            "type": "string",
+            "title": "School"
+          },
+          "degree": {
+            "type": "string",
+            "title": "Degree"
+          },
+          "field_of_study": {
+            "type": "string",
+            "title": "Field Of Study"
+          }
+        },
+        "type": "object",
+        "required": [
+          "school",
+          "degree",
+          "field_of_study"
+        ],
+        "title": "Education"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LinkedInProfile": {
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "title": "Profile Id"
+          },
+          "linkedin_url": {
+            "type": "string",
+            "title": "Linkedin Url"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "first_name": {
+            "type": "string",
+            "title": "First Name"
+          },
+          "last_name": {
+            "type": "string",
+            "title": "Last Name"
+          },
+          "headline": {
+            "type": "string",
+            "title": "Headline"
+          },
+          "current_title": {
+            "type": "string",
+            "title": "Current Title"
+          },
+          "current_company": {
+            "type": "string",
+            "title": "Current Company"
+          },
+          "location": {
+            "type": "string",
+            "title": "Location"
+          },
+          "verified_email": {
+            "type": "string",
+            "title": "Verified Email"
+          },
+          "email_status": {
+            "type": "string",
+            "title": "Email Status"
+          },
+          "work_experience": {
+            "items": {
+              "$ref": "#/components/schemas/WorkExperience"
+            },
+            "type": "array",
+            "title": "Work Experience"
+          },
+          "education": {
+            "items": {
+              "$ref": "#/components/schemas/Education"
+            },
+            "type": "array",
+            "title": "Education"
+          },
+          "skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Skills"
+          },
+          "summary_bio": {
+            "type": "string",
+            "title": "Summary Bio"
+          },
+          "connections_count": {
+            "type": "integer",
+            "title": "Connections Count"
+          },
+          "ai_lead_score": {
+            "type": "string",
+            "title": "Ai Lead Score"
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile_id",
+          "linkedin_url",
+          "full_name",
+          "first_name",
+          "last_name",
+          "headline",
+          "current_title",
+          "current_company",
+          "location",
+          "verified_email",
+          "email_status",
+          "work_experience",
+          "education",
+          "skills",
+          "summary_bio",
+          "connections_count",
+          "ai_lead_score"
+        ],
+        "title": "LinkedInProfile"
+      },
+      "LinkedInScrapeRequest": {
+        "properties": {
+          "profile_url": {
+            "type": "string",
+            "title": "Profile Url",
+            "description": "LinkedIn profile URL",
+            "example": "https://www.linkedin.com/in/williamhgates"
+          },
+          "search_query": {
+            "type": "string",
+            "title": "Search Query",
+            "description": "Search query or title & location",
+            "example": "VP of Engineering San Francisco"
+          },
+          "extract_email": {
+            "type": "boolean",
+            "title": "Extract Email",
+            "description": "Verify and extract decision-maker email address",
+            "default": true
+          },
+          "max_profiles": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Max Profiles",
+            "description": "Maximum number of LinkedIn profiles to return",
+            "default": 10
+          }
+        },
+        "type": "object",
+        "title": "LinkedInScrapeRequest"
+      },
+      "LinkedInScrapeResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "query_type": {
+            "type": "string",
+            "title": "Query Type"
+          },
+          "target_query": {
+            "type": "string",
+            "title": "Target Query"
+          },
+          "total_scraped": {
+            "type": "integer",
+            "title": "Total Scraped"
+          },
+          "profiles": {
+            "items": {
+              "$ref": "#/components/schemas/LinkedInProfile"
+            },
+            "type": "array",
+            "title": "Profiles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "query_type",
+          "target_query",
+          "total_scraped",
+          "profiles"
+        ],
+        "title": "LinkedInScrapeResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WorkExperience": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "company": {
+            "type": "string",
+            "title": "Company"
+          },
+          "duration": {
+            "type": "string",
+            "title": "Duration"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "company",
+          "duration",
+          "description"
+        ],
+        "title": "WorkExperience"
+      }
+    }
+  }
+}

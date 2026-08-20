@@ -1,0 +1,12 @@
+{
+  "actorSpecification": 1,
+  "name": "linkedin-scraper-ai",
+  "title": "LinkedIn Profile Scraper & Verified Email Extractor Pro",
+  "description": "Extract bulk LinkedIn profiles, work experience, education, skills, and verified decision-maker emails without cookies or login. Just $1.99/1k results—50% cheaper!",
+  "version": "1.0.0",
+  "meta": {
+    "category": "LEAD_GENERATION"
+  },
+  "dockerfile": "./Dockerfile",
+  "output": "./output_schema.json"
+}

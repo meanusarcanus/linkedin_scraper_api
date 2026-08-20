@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+linkedin_scraper/__init__.py
+linkedin_scraper/client.py
+linkedin_scraper_api.egg-info/PKG-INFO
+linkedin_scraper_api.egg-info/SOURCES.txt
+linkedin_scraper_api.egg-info/dependency_links.txt
+linkedin_scraper_api.egg-info/requires.txt
+linkedin_scraper_api.egg-info/top_level.txt
